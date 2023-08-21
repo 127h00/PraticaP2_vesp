@@ -1,2 +1,5 @@
 aula de prática profissional
 	autor - > Anna Clara Ferraz
+
+aula do dia 21/08
+	usando VS code para atualizar os arquivos
