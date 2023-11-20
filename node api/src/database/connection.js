@@ -3,18 +3,25 @@ const sql = require("mssql");
 
 let connectionDB = null;
 
-async function getConnection() {
-  if(connectionDB != null && connectionDB.connected)
-    return connection;
-
+async function handleConnection() {
   console.log("sql server conectando...");
-  return await sql.connect(config).then(connection => {
+  connectionDB = await sql.connect(config)
+    .then(c => {
       console.log("sql server conectado!");
-      connectionDB = connection;
-      return connection;
-  }).catch(err => {
-      console.log("ERRO in sql server: " + err);
-  })
+      return c;
+    })
+    .catch(err => {
+      throw new Error("ERRO in sql server: " + err);
+    })
+
+  return connectionDB;
+}
+
+function getConnection() {
+  if(connectionDB != null && connectionDB.connected)
+    return connectionDB;
+
+  return handleConnection();
 }
 
 module.exports = getConnection;
