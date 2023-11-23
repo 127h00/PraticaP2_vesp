@@ -1,7 +1,8 @@
+- "Dicionário de dados" é um arquivo em exel com tabelas com os dados das tabelas do banco de dados deste projeto.
 - "TABELAS_schemaLoja.sql" é o script que cria as tabelas do schema Loja;
 - "INSERT_schemaLoja.sql" é o script que foi utilizados para simular a inserção de dados nas tabelas, além de dados que serão de fato utilizado no projeto;
 - "TR_updateEstoque" é um trigger que faz o controle do estoque dos produtos quando um pedido é feito, verificando se a quantidade será suficiente, se ainda há estoque, e que em caso positivo atualizará o estoque do produto. Ademais, verifica se a situação do pedido é válida, sendo possível o char 'P' e 'C', onde 'P' significa que o pedido ainda está pendente e 'C' que o pedido foi concluído;
 - "VIEW_pedidos" possue três views, a primeira serve para ver de forma simplificada os pedidos independente de sua situação, a segunda para ver de forma simplificada os pedidos que ainda estão pendentes e a última view serve para motrar os pedidos que possuem baixo estoque (estoque abaixo de 5);
 - "ST_excluiProduto" é um storage procedure que, ao apagar um produto, excluí automaticamente todos os pedidos que possuem esse mesmo produto.
 - "CHAMA_ST_excluiProduto" é apenas o comando que chama o storage procedure que excluí produto. 
-- "Dicionário de dados" é um arquivo em exel com tabelas com os dados das tabelas do banco de dados deste projeto.
+- "IDX_loja" é script que possuí os índices utilizados no banco de dados.
