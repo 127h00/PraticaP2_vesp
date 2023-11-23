@@ -4,3 +4,4 @@
 - "VIEW_pedidos" possue três views, a primeira serve para ver de forma simplificada os pedidos independente de sua situação, a segunda para ver de forma simplificada os pedidos que ainda estão pendentes e a última view serve para motrar os pedidos que possuem baixo estoque (estoque abaixo de 5);
 - "ST_excluiProduto" é um storage procedure que, ao apagar um produto, excluí automaticamente todos os pedidos que possuem esse mesmo produto.
 - "CHAMA_ST_excluiProduto" é apenas o comando que chama o storage procedure que excluí produto. 
+- "Dicionário de dados" é um arquivo em exel com tabelas com os dados das tabelas do banco de dados deste projeto.
