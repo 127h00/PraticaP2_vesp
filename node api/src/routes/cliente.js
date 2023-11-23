@@ -1,6 +1,10 @@
 const express = require('express');
-// const clienteDB = require('../database/cliente');
+const clienteDB = require('../database/cliente');
 const clienteRouter = express.Router();
+
+clienteRouter.get('/', async (req, res) => {
+    res.status(200).json(await clienteDB.selecionarClientes())
+  })
 
 clienteRouter.post('/cadastro', async (req, res) => {
     const { cpf, prenome, sobrenome, email, senha, cep, bairro, rua, numero,

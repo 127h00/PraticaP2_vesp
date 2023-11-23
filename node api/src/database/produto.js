@@ -6,7 +6,7 @@ module.exports = {
       const result = await getConnection().query('SELECT * FROM loja.produto')
       return result.recordset
     } catch (error) {
-      console.log("Error in select all Products:"+error)
+      console.log("Error ao selecionar todos os produtos:"+error)
     }
   },
 
@@ -16,7 +16,7 @@ module.exports = {
       // .query(`st.buscarPorID '${id}'`)
       return result.recordset[0]
     } catch (error) {
-      console.log("Error in select Product by id:"+error)
+      console.log("Error ao selecionar o produto pelo id:"+error)
     }
   }
 }

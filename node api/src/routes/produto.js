@@ -1,7 +1,5 @@
 const express = require('express'); // receber o pacote  express
-
 const produtoDB = require('../database/produto')
-
 const produtoRouter = express.Router(); // criar um roteador
 
 produtoRouter.get('/', async (req, res) => {
