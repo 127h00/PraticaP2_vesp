@@ -1,16 +1,16 @@
 const getConnection = require('./connection')
 
 module.exports = {
-  fzrPedido: async () => {
+  
+  fzrPedido: async (cpf_c, produto, quantidade, tamanho) => {
     try {
-      const result = await getConnection().query(`INSERT INTO Loja.pedido VALUES ${cpf_c},
+        await getConnection().query(`INSERT INTO Loja.pedido VALUES ${cpf_c},
         ${produto}, ${quantidade}, ${tamanho}, ${situacao}`)
-      return result.recordset
+      return true
     } catch (error) {
-      console.log("Error in select all Products:"+error)
+      console.log("Error ao fazer pedido:"+error)
+      return false
     }
   },
 
-
-  
 }

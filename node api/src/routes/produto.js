@@ -14,17 +14,42 @@ produtoRouter.get('/:id', async (req, res) => {
   res.status(200).json(produto)
 })
 
-// produtoRouter.post('/', async (req, res) => {
-//   const { nome_produto, estoque, descricao } = req.body
+produtoRouter.post('/postProd', async (req, res) => {
+  const { id_produto, nome_produto, estoque, preco, descricao } = req.body
 
-//   if (!nome_produto || !estoque || !descricao)
-//     return res.status(400).json({ erro: 'Dados obrigatórios não informados' })
+  if (!id_produto ||!nome_produto || !estoque || !preco || !descricao)
+    return res.status(400).json({ erro: 'Dados obrigatórios não informados' })
 
-//   if(nome_produto.length > 50)
-//     return res.status(400).json({ erro: 'O nome do produto não pode ter mais de 50 caracteres' })
+  if(id_produto.length > 6)
+    return res.status(400).json({ erro: 'O id do produto deve ter 6 números' })
+  if(nome_produto.length > 60)
+    return res.status(400).json({ erro: 'O nome do produto não pode ter mais de 60 caracteres' })
+  if(preco.length > 8)
+    return res.status(400).json({ erro: 'O preço do produto não pode ter mais de 8 digítos' })
+  if(descricao.length > 400)
+    return res.status(400).json({ erro: 'A descrição do produto não pode ter mais de 400 caracteres' })
+
+  console.log(req.body)
+  res.sendStatus(201)
+})
+
+produtoRouter.post('/postProd', async (req, res) => {
+  const { id_produto, nome_produto, estoque, preco, descricao } = req.body
+
+  if (!id_produto ||!nome_produto || !estoque || !preco || !descricao)
+    return res.status(400).json({ erro: 'Dados obrigatórios não informados' })
+
+  if(id_produto.length > 6)
+    return res.status(400).json({ erro: 'O id do produto deve ter 6 números' })
+  if(nome_produto.length > 60)
+    return res.status(400).json({ erro: 'O nome do produto não pode ter mais de 60 caracteres' })
+  if(preco.length > 8)
+    return res.status(400).json({ erro: 'O preço do produto não pode ter mais de 8 digítos' })
+  if(descricao.length > 400)
+    return res.status(400).json({ erro: 'A descrição do produto não pode ter mais de 400 caracteres' })
   
-//   console.log(req.body)
-//   res.sendStatus(201)
-// })
+  console.log(req.body)
+  res.sendStatus(201)
+})
 
 module.exports = produtoRouter; // exportar o roteador
