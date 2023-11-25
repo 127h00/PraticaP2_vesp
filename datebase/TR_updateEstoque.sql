@@ -30,10 +30,10 @@ BEGIN
         where
             id_produto = @produto
 
-    IF @situacao != 'C' and @situacao != 'P'
+    IF @situacao <> 'P'
     BEGIN
 	ROLLBACK TRANSACTION
-	RAISERROR('situação inválida', 15, 1);
+	RAISERROR('pedidos novos são obrigatóriamente pendentes', 15, 1);
 	END
     ELSE 
     print('pedido adicionado!')

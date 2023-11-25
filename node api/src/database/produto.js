@@ -1,7 +1,7 @@
 const getConnection = require('./connection')
 
 module.exports = {
-  selecionarTodos: async () => {
+  selecionarTodosProd: async () => {
     try {
       const result = await getConnection().query('SELECT * FROM loja.produto')
       return result.recordset
@@ -17,6 +17,16 @@ module.exports = {
       return result.recordset[0]
     } catch (error) {
       console.log("Error ao selecionar o produto pelo id:"+error)
+    }
+  },
+
+  postaProd: async (id_produto, nome_produto, estoque, preco, descricao) => {
+    try {
+        await getConnection().query(`INSERT INTO loja.cliente VALUES (${id_produto}, ${nome_produto}, ${estoque}, ${preco}, ${descricao})`)
+        return true
+    } catch (err) {
+        console.log("Error na criação do produto: "+err.code)
+        return false
     }
   }
 }

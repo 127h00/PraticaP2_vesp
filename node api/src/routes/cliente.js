@@ -4,7 +4,15 @@ const clienteRouter = express.Router();
 
 clienteRouter.get('/', async (req, res) => {
     res.status(200).json(await clienteDB.selecionarClientes())
-  })
+})
+
+clienteRouter.get('/:cpf', async (req, res) => {
+    const { cpf } = req.params
+    const cliente = await clienteDB.selecionarPorIdCli(cpf)
+    if (!cliente)
+      res.status(404).json({ erro: 'cliente não encontrado' })
+    res.status(200).json(cliente)
+})
 
 clienteRouter.post('/cadastro', async (req, res) => {
     const { cpf, prenome, sobrenome, email, senha, cep, bairro, rua, numero,
@@ -37,7 +45,6 @@ clienteRouter.post('/cadastro', async (req, res) => {
 
     console.log(req.body)
     res.sendStatus(201)
-
 })
 
 module.exports = clienteRouter;

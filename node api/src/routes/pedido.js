@@ -2,7 +2,19 @@ const express = require('express'); // receber o pacote  express
 const pedidoDB = require('../database/pedido')
 const pedidoRouter = express.Router(); 
 
-clienteRouter.post('/fzrPedido', async (req, res) => {
+pedidoRouter.get('/', async (req, res) => {
+    res.status(200).json(await pedidoDB.selecionarTodosPed())
+})
+
+pedidoRouter.get('/:id', async (req, res) => {
+    const { id } = req.params
+    const pedido = await pedidoDB.selecionarPorIdPed(id)
+    if (!pedido)
+      res.status(404).json({ erro: 'pedido não encontrado' })
+    res.status(200).json(pedido)
+  })
+
+pedidoRouter.post('/fzrPedido', async (req, res) => {
     const { cpf_c, produto, quantidade, tamanho } = req.body
 
     if (!cpf_c || !produto || !quantidade || !tamanho)
@@ -18,4 +30,4 @@ clienteRouter.post('/fzrPedido', async (req, res) => {
     res.sendStatus(201)
 })
 
-module.exports = clienteRouter;
+module.exports = pedidoRouter;

@@ -25,4 +25,4 @@ create view Loja.enderecos as
 	select cpf, cep, bairro, rua, numero, complemento 
 	from loja.cliente
 
-select * from loja.enderecos 
+select * from loja.enderecos

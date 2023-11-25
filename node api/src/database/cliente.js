@@ -6,7 +6,16 @@ module.exports = {
             result = await getConnection().query('SELECT * FROM Loja.cliente')
         return result.recordset 
         } catch (error) {
-            console.log("Error ao selecionar todos os produtos:"+error)
+            console.log("Error ao selecionar todos os clientes:"+error)
+        }
+    },
+
+    selecionarPorIdCli: async (cpf) => {
+        try {
+          const result = await getConnection().query(`SELECT * FROM loja.cliente WHERE cpf=${cpf}`)
+          return result.recordset[0]
+        } catch (error) {
+          console.log("Error ao selecionar o cliente pelo cpf:"+error)
         }
     },
 
@@ -20,9 +29,4 @@ module.exports = {
             return false
         }
     }
-
-
-
-
-
 }
