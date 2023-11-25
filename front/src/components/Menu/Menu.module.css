@@ -1,0 +1,30 @@
+.faixa {
+    width: 1540px;
+    height: 100px;
+    background-color: #0E371C;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    
+  }
+
+  .h1{
+    color: rgb(255, 255, 255);
+    font-family: Fontdiner Swanky;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 40px;
+    line-height: 0px;
+    height: 50px;
+  }
+
+  .nav{
+    height: 35px;
+    width: 250px;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(255, 255, 255);
+
+  }
