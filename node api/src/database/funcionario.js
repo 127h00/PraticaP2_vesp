@@ -27,5 +27,25 @@ module.exports = {
         console.log("Error na criação do funcionário: "+err.code)
         return false
     }
-  }
+  },
+
+  atualizarFunc: async (id_funcionario, senha) => {
+    try {
+        await getConnection().query(`UPDATE loja.funcionario SET senha = '${senha}' WHERE id_funcionario = '${id_funcionario}'`)
+        return true
+    } catch(err) {
+        console.log("Error ao atualizar funcionário: "+err.code)
+        return false
+    }
+},
+
+deletarFunc: async (id_funcionario) => {
+    try {
+        await getConnection().query(`DELETE FROM loja.funcionario WHERE id_funcionario = '${id_funcionario}'`)
+        return true
+    } catch(err) {
+        console.log("Error ao deletar funcionário: "+err.code)
+        return false
+    }
+}
 }

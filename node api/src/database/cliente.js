@@ -30,7 +30,7 @@ module.exports = {
         }
     },
 
-    atualizarCli: async (cpf, cliente) => {
+    atualizarCli: async (cpf, prenome, sobrenome, email, senha, cep, bairro, rua, numero, complemento) => {
         try {
             await getConnection().query(`UPDATE loja.cliente SET prenome = '${prenome}', sobrenome = '${sobrenome}', email = '${email}',
                 senha = '${senha}', cep = '${cep}', bairro = '${bairro}', rua = '${rua}', numero = '${numero}', complemento = '${complemento}'

@@ -30,4 +30,24 @@ module.exports = {
     }
   },
 
+  atualizarPed: async (id_pedido, cpf_c, produto, quantidade, tamanho, situacao) => {
+    try {
+        await getConnection().query(`UPDATE loja.pedido SET cpf_c = '${cpf_c}', produto = '${produto}', quantidade = '${quantidade}',
+            tamanho = '${tamanho}', situacao = '${situacao}' WHERE id_pedido = '${id_pedido}'`)
+        return true
+    } catch(err) {
+        console.log("Error ao atualizar pedido: "+err.code)
+        return false
+    }
+  },
+
+  deletarPed: async (id_pedido) => {
+      try {
+          await getConnection().query(`DELETE FROM loja.pedido WHERE id_pedido = '${id_pedido}'`)
+          return true
+      } catch(err) {
+          console.log("Error ao deletar pedido: "+err.code)
+          return false
+      }
+  }
 }
