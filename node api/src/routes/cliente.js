@@ -14,6 +14,18 @@ clienteRouter.get('/:cpf', async (req, res) => {
     res.status(200).json(cliente)
 })
 
+clienteRouter.get('/enderecos', async (req, res) => {
+    res.status(200).json(await clienteDB.enderecoCli())
+})
+
+clienteRouter.get('/:cpf', async (req, res) => {
+    const { cpf } = req.params
+    const cliente = await clienteDB.enderecoCliID(cpf)
+    if (!cliente)
+      res.status(404).json({ erro: 'cliente não encontrado' })
+    res.status(200).json(cliente)
+})
+
 clienteRouter.post('/cadastro', async (req, res) => {
     const { cpf, prenome, sobrenome, email, senha, cep, bairro, rua, numero,
             complemento } = req.body

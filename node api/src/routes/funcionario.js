@@ -6,9 +6,9 @@ funcionarioRouter.get('/', async (req, res) => {
   res.status(200).json(await funcionarioDB.selecionarTodosFunc())
 })
 
-funcionarioRouter.get('/:id', async (req, res) => {
-  const { id } = req.params
-  const funcionario = await funcionarioDB.selecionarPorIdFunc(id)
+funcionarioRouter.get('/:id_funcionario', async (req, res) => {
+  const { id_funcionario } = req.params
+  const funcionario = await funcionarioDB.selecionarPorIdFunc(id_funcionario)
   if (!funcionario)
     res.status(404).json({ erro: 'funcionário não encontrado' })
   res.status(200).json(funcionario)
@@ -29,7 +29,7 @@ funcionarioRouter.post('/postFunc', async (req, res) => {
   res.sendStatus(201)
 })
 
-funcionarioRouter.put("/:id", async (req, res) => {
+funcionarioRouter.put("/:id_funcionario", async (req, res) => {
   const { id_funcionario } = req.params
   const { senha } = req.body
 
@@ -49,7 +49,7 @@ funcionarioRouter.put("/:id", async (req, res) => {
   return res.status(200).json({ message: "funcionário atualizado com sucesso" })
 })
 
-funcionarioRouter.delete("/:id", async (req, res) => {
+funcionarioRouter.delete("/:id_funcionario", async (req, res) => {
   const { id_funcionario } = req.params
   if(id_funcionario.length != 4)
     return res.status(400).json({ erro: 'O id do funcionário deve ter 4 números' })

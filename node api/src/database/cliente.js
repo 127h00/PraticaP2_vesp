@@ -50,5 +50,25 @@ module.exports = {
             console.log("Error ao deletar Cliente: "+err.code)
             return false
         }
+    },
+
+    enderecoCli: async () => {
+        try {
+            await getConnection().query(`SELECT * FROM loja.v_endereco`)
+            return true
+        } catch(err) {
+            console.log("Error ao visualizar os endereços dos clientes: "+err.code)
+            return false
+        }
+    },
+
+    enderecoCliID: async (cpf) => {
+        try {
+            await getConnection().query(`SELECT * FROM loja.v_endereco WHERE cpf= '${cpf}'`)
+            return true
+        } catch(err) {
+            console.log("Error ao visualizar os endereços dos clientes: "+err.code)
+            return false
+        }
     }
 }

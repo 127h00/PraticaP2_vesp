@@ -6,12 +6,28 @@ pedidoRouter.get('/', async (req, res) => {
     res.status(200).json(await pedidoDB.selecionarTodosPed())
 })
 
-pedidoRouter.get('/:id', async (req, res) => {
-    const { id } = req.params
-    const pedido = await pedidoDB.selecionarPorIdPed(id)
+pedidoRouter.get('/:id_pedido', async (req, res) => {
+    const { id_pedido } = req.params
+    const pedido = await pedidoDB.selecionarPorIdPed(id_pedido)
     if (!pedido)
       res.status(404).json({ erro: 'pedido não encontrado' })
     res.status(200).json(pedido)
+})
+
+  pedidoRouter.get('/pedidoSimplif', async (req, res) => {
+    res.status(200).json(await pedidoDB.pedidoSimplif())
+ })
+  
+pedidoRouter.get('/:id_pedido', async (req, res) => {
+    const { id_pedido } = req.params
+    const pedido = await pedidoDB.selecionarPorIdPed(id_pedido)
+    if (!pedido)
+      res.status(404).json({ erro: 'pedido não encontrado' })
+    res.status(200).json(pedido)
+  })
+  
+  pedidoRouter.get('/pedidoPendente', async (req, res) => {
+    res.status(200).json(await pedidoDB.pedidoPendente())
   })
 
 pedidoRouter.post('/fzrPedido', async (req, res) => {
@@ -33,7 +49,7 @@ pedidoRouter.post('/fzrPedido', async (req, res) => {
     res.sendStatus(201)
 })
 
-pedidoRouter.put("/:id", async (req, res) => {
+pedidoRouter.put("/:id_pedido", async (req, res) => {
   const { id_pedido } = req.params
   const { cpf_c, produto, quantidade, tamanho, situacao } = req.body
 

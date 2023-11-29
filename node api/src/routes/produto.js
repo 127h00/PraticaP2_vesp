@@ -6,12 +6,16 @@ produtoRouter.get('/', async (req, res) => {
   res.status(200).json(await produtoDB.selecionarTodosProd())
 })
 
-produtoRouter.get('/:id', async (req, res) => {
-  const { id } = req.params
-  const produto = await produtoDB.selecionarPorIdProd(id)
+produtoRouter.get('/:id_produto', async (req, res) => {
+  const { id_produto } = req.params
+  const produto = await produtoDB.selecionarPorIdProd(id_produto)
   if (!produto)
     res.status(404).json({ erro: 'Produto não encontrado' })
   res.status(200).json(produto)
+})
+
+produtoRouter.get('/baixoEstoque', async (req, res) => {
+  res.status(200).json(await produtoDB.baixoEstoque())
 })
 
 produtoRouter.post('/postProd', async (req, res) => {
@@ -35,7 +39,7 @@ produtoRouter.post('/postProd', async (req, res) => {
   res.sendStatus(201)
 })
 
-produtoRouter.put("/:id", async (req, res) => {
+produtoRouter.put("/:id_produto", async (req, res) => {
   const { id_produto } = req.params
   const { nome_produto, estoque, preco, descricao } = req.body
 
@@ -62,7 +66,7 @@ produtoRouter.put("/:id", async (req, res) => {
   return res.status(200).json({ message: "produto atualizado com sucesso" })
 })
 
-produtoRouter.delete("/:id", async (req, res) => {
+produtoRouter.delete("/:id_produto", async (req, res) => {
   const { id_produto } = req.params
   if(id_produto.length > 6)
     return res.status(400).json({ erro: 'O id do produto deve ter 6 números' })

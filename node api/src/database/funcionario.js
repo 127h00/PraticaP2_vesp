@@ -10,9 +10,9 @@ module.exports = {
     }
   },
 
-  selecionarPorIdFunc: async (id) => {
+  selecionarPorIdFunc: async (id_funcionario) => {
     try {
-      const result = await getConnection().query(`SELECT * FROM loja.funcionario WHERE id_funcionario=${id}`)
+      const result = await getConnection().query(`SELECT * FROM loja.funcionario WHERE id_funcionario='${id_funcionario}'`)
       return result.recordset[0]
     } catch (error) {
       console.log("Error ao selecionar o funcionário pelo id:"+error)
@@ -21,7 +21,7 @@ module.exports = {
 
   criaFunc: async (id_funcionario, senha) => {
     try {
-        await getConnection().query(`INSERT INTO loja.funcionario VALUES (${id_funcionario}, ${senha})`)
+        await getConnection().query(`INSERT INTO loja.funcionario VALUES ('${id_funcionario}', '${senha}')`)
         return true
     } catch (err) {
         console.log("Error na criação do funcionário: "+err.code)
