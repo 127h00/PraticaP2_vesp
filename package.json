@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "index.js": "^0.0.3"
+    "index.js": "^0.0.3",
+    "react-router-dom": "^6.20.0"
   }
 }
