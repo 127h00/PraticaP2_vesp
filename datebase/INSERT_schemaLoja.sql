@@ -1,7 +1,7 @@
 INSERT INTO Loja.funcionario VALUES
-    ('2306', 'a127c'),
-    ('2303', 'aJobs'),
-    ('2333', 'alf3u')
+    ('2306', 'Anna Clara Ferraz', 'a127c'),
+    ('2303','Ana Luiza Job', 'aJobs'),
+    ('2333', 'Thiago Carvalho', 'alf3u')
 
 SELECT * FROM Loja.funcionario
 
@@ -40,7 +40,9 @@ INSERT INTO Loja.produto VALUES
     'Calça jeans azul claro estilo wide leg com rasgos')
 
 SELECT * FROM Loja.produto 
-
+delete from loja.produto where id_produto = '000010'
+INSERT INTO loja.produto (id_produto, nome_produto, estoque, preco, descricao) VALUES  ('000009', 'Calça jeans wide leg', 25, 146, 
+    'Calça jeans azul claro estilo wide leg com rasgos')
 
 INSERT INTO Loja.pedido VALUES
     ('44845640090', '000002', 1, 'G', 'P')

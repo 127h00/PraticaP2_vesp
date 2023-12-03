@@ -2,11 +2,11 @@ const express = require('express');
 const clienteDB = require('../database/cliente');
 const clienteRouter = express.Router();
 
-clienteRouter.get('/', async (req, res) => {
+clienteRouter.get('/find', async (req, res) => {
     res.status(200).json(await clienteDB.selecionarClientes())
 })
 
-clienteRouter.get('/:cpf', async (req, res) => {
+clienteRouter.get('/find/:cpf', async (req, res) => {
     const { cpf } = req.params
     const cliente = await clienteDB.selecionarPorIdCli(cpf)
     if (!cliente)
@@ -14,11 +14,11 @@ clienteRouter.get('/:cpf', async (req, res) => {
     res.status(200).json(cliente)
 })
 
-clienteRouter.get('/enderecos', async (req, res) => {
+clienteRouter.get('/address', async (req, res) => {
     res.status(200).json(await clienteDB.enderecoCli())
 })
 
-clienteRouter.get('/:cpf', async (req, res) => {
+clienteRouter.get('/address/:cpf', async (req, res) => {
     const { cpf } = req.params
     const cliente = await clienteDB.enderecoCliID(cpf)
     if (!cliente)
@@ -26,12 +26,12 @@ clienteRouter.get('/:cpf', async (req, res) => {
     res.status(200).json(cliente)
 })
 
-clienteRouter.post('/cadastro', async (req, res) => {
+clienteRouter.post('/create', async (req, res) => {
     const { cpf, prenome, sobrenome, email, senha, cep, bairro, rua, numero,
             complemento } = req.body
 
-    if (!cpf || !prenome || !sobrenome || !email || !senha || !cep || !bairro || !rua
-        || !numero)
+    if (!cpf && !prenome && !sobrenome && !email && !senha && !cep && !bairro && !rua
+        && !numero)
         return res.status(400).json({ erro: 'Dados obrigatórios não informados' })
 
     if(cpf.length != 11)
@@ -55,11 +55,13 @@ clienteRouter.post('/cadastro', async (req, res) => {
     if(complemento != null && complemento.length > 70)
         return res.status(400).json({ erro: 'O complemento não pode ter mais de 70 caracteres' })
 
-    console.log(req.body)
+    if(!await clienteDB.cadastraCliente( cpf, prenome, sobrenome, email, senha, cep, bairro, rua, numero,
+        complemento))
+    return res.status(501).json({ error: "erro ao cadastrar cliente" })
     res.sendStatus(201)
 })
 
-clienteRouter.put("/:cpf", async (req, res) => {
+clienteRouter.put("/alter/:cpf", async (req, res) => {
     const { cpf } = req.params
     const { prenome, sobrenome, email, senha, cep, bairro, rua, numero,
             complemento } = req.body
@@ -88,14 +90,12 @@ clienteRouter.put("/:cpf", async (req, res) => {
     if(!cliente)
         return res.status(404).json({ error: "cliente não encontrado" })
 
-    if(!await clienteDB.atualizarCli(cpf, {
-        prenome, sobrenome, email, senha, cep, bairro, rua, numero, complemento
-    }))
+    if(!await clienteDB.atualizarCli(cpf, prenome, sobrenome, email, senha, cep, bairro, rua, numero, complemento))
         return res.status(401).json({ error: "erro ao atualizar cliente" })
     return res.status(200).json({ message: "cliente atualizado com sucesso" })
 })
 
-clienteRouter.delete("/:cpf", async (req, res) => {
+clienteRouter.delete("/delete/:cpf", async (req, res) => {
     const { cpf } = req.params
     if(cpf.length != 11)
         return res.status(400).json({ erro: 'O CPF deve ter 11 números' })
