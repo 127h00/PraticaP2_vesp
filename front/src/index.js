@@ -1,13 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Home from './pages/Home/Home';
-import reportWebVitals from './reportWebVitals';
-<<<<<<< HEAD
 import Login from './pages/Login/Login';
-=======
+import Home from './pages/Home/Home';
+import reportWebVitals from './reportWebVitals'; 
 import {createBrowserRouter, RouterProvider} from  "react-router-dom";
 import Produtos from './pages/InfoProdutos/Produtos';
->>>>>>> c0478fe4b500978c2b8f310463a82bcb02c1b459
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const Routering = createBrowserRouter([
