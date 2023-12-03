@@ -1,7 +1,5 @@
 import ApiService from '../../hooks/useapi';
 import styles from './Login.module.css'
-const api = new ApiService()
-
 
 import React, { useState } from 'react';
 
@@ -46,7 +44,7 @@ function Login() {
                 />
 
                 
-                <button onClick={api.Login(user,password)}>Entrar</button>
+                <button onClick={() => ApiService.Login(user,password)}>Entrar</button>
                 
             </div>
             

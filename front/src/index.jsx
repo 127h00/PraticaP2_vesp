@@ -1,31 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Login from './pages/Login/Login';
 import Home from './pages/Home/Home';
 import reportWebVitals from './reportWebVitals'; 
-import {createBrowserRouter, RouterProvider} from  "react-router-dom";
+import { BrowserRouter, Routes, Route } from  "react-router-dom";
 import Produtos from './pages/InfoProdutos/Produtos';
+import Login from './pages/Login/Login';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const Routering = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />
-  },
-  {
-    path: "/produtos",
-    element: <Produtos/>
-  }
-]);
 
 root.render(
   <React.StrictMode>
-<<<<<<< HEAD
-    <Login/>
-=======
-    <RouterProvider router={Routering} />
->>>>>>> c0478fe4b500978c2b8f310463a82bcb02c1b459
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' Component={Home} />
+        <Route path='/login' Component={Login} />
+        <Route path='/produtos' Component={Produtos} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
