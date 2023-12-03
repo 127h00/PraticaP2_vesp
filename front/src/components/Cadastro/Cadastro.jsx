@@ -6,16 +6,6 @@ function Cadastro(){
         <p>
             <text></text>
         </p>
-
-
-
-
-
-
-
-
-
-
         <p>
         <button>Submeter</button>
         </p>

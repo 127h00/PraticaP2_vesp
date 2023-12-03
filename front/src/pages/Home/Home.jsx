@@ -9,9 +9,13 @@ import regatabrancamasc from '../img/regatabrancamasc.jpeg'
 import calca from '../img/calca.jpeg'
 import jaquetapretamasc from '../img/jaquetapretamasc.jpeg'
 import calcafem from '../img/calcafem.png'
+import jaquetapuffer from '../img/jaquetapuffer.jpeg'
+import banner from '../img/banner.jpeg'
+
 
 
 import styles from './Home.module.css'
+import Banner from '../../components/Banner/Banner';
 
 function Home() {
 
@@ -19,6 +23,8 @@ function Home() {
     <>
       <Menu />
       <div className={styles.main}>
+        <Banner image={banner}/> 
+        <Card image={jaquetapuffer} titulo={"Jaqueta Puffer"} preco={"R$200"} />
         <Card image={blusabranca} titulo={"Baby tee USA"} preco={"R$43.50"} />
         <Card image={jaquetavermelha} titulo={"Jaqueta vermelha"} preco={"R$110.30"} />
         <Card image={saiapreta} titulo={"Mini saia preta"} preco={"R$ 47.80"} />
