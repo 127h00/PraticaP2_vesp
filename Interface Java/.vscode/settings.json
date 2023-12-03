@@ -1,0 +1,9 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "jars/mssql-jdbc-12.4.2.jre11-sources.jar",
+        "jars/mssql-jdbc-12.4.2.jre11.jar",
+        "jars/mssql-jdbc-12.4.2.jre11-javadoc.jar"
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
+}

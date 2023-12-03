@@ -3,7 +3,7 @@ const getConnection = require('./connection')
 module.exports = {
   selecionarTodosFunc: async () => {
     try {
-      const result = await getConnection().query('SELECT id_funcionario FROM loja.funcionario')
+      const result = await getConnection().query('SELECT * FROM loja.funcionario')
       return result.recordset
     } catch (error) {
       console.log("Error ao selecionar todos os funcionarios:"+error)
@@ -19,33 +19,33 @@ module.exports = {
     }
   },
 
-  criaFunc: async (id_funcionario, senha) => {
+  criaFunc: async (id_funcionario, nome_completo, senha) => {
     try {
-        await getConnection().query(`INSERT INTO loja.funcionario VALUES ('${id_funcionario}', '${senha}')`)
-        return true
+      const result = await getConnection().query(`INSERT INTO loja.funcionario (id_funcionario, nome_completo, senha) VALUES ('${id_funcionario}', '${nome_completo}', '${senha}')`)
+      return true
     } catch (err) {
         console.log("Error na criação do funcionário: "+err.code)
         return false
     }
   },
 
-  atualizarFunc: async (id_funcionario, senha) => {
+  atualizarFunc: async (id_funcionario, nome_completo, senha) => {
     try {
-        await getConnection().query(`UPDATE loja.funcionario SET senha = '${senha}' WHERE id_funcionario = '${id_funcionario}'`)
-        return true
+      const result = await getConnection().query(`UPDATE loja.funcionario SET nome_completo= '${nome_completo}', senha = '${senha}' WHERE id_funcionario = '${id_funcionario}'`)
+      return true
     } catch(err) {
         console.log("Error ao atualizar funcionário: "+err.code)
-        return false
+        return falses
     }
-},
+  },
 
-deletarFunc: async (id_funcionario) => {
+  deletarFunc: async (id_funcionario) => {
     try {
-        await getConnection().query(`DELETE FROM loja.funcionario WHERE id_funcionario = '${id_funcionario}'`)
-        return true
+      const result = await getConnection().query(`DELETE FROM loja.funcionario WHERE id_funcionario = '${id_funcionario}'`)
+      return true
     } catch(err) {
         console.log("Error ao deletar funcionário: "+err.code)
         return false
     }
-}
+  }
 }

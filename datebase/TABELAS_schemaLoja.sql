@@ -2,6 +2,7 @@ alter schema Loja
 
 create table Loja.funcionario (
     id_funcionario CHAR(4) NOT NULL PRIMARY KEY,
+    nome_completo VARCHAR(60) NOT NULL,
     senha VARCHAR(30) NOT NULL
 )
 

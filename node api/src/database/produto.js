@@ -21,8 +21,8 @@ module.exports = {
 
   postaProd: async (id_produto, nome_produto, estoque, preco, descricao) => {
     try {
-        await getConnection().query(`INSERT INTO loja.cliente VALUES ('${id_produto}', '${nome_produto}', ${estoque}, '${preco}', '${descricao}')`)
-        return true
+      const result = await getConnection().query(`INSERT INTO loja.produto (id_produto, nome_produto, estoque, preco, descricao) VALUES ('${id_produto}', '${nome_produto}', ${estoque}, ${preco}, '${descricao}')`)
+      return true
     } catch (err) {
         console.log("Error na criação do produto: "+err.code)
         return false
@@ -31,19 +31,19 @@ module.exports = {
 
   atualizarProd: async (id_produto, nome_produto, estoque, preco, descricao) => {
     try {
-        await getConnection().query(`UPDATE loja.produto SET nome_produto = '${nome_produto}', estoque = ${estoque}, preco = '${preco}',
-            descricao = '${descricao}' WHERE id_produto = '${id_produto}'`)
-        return true
+      const result = await getConnection().query(`UPDATE loja.produto SET nome_produto = '${nome_produto}', estoque = ${estoque}, preco = ${preco},
+          descricao = '${descricao}' WHERE id_produto = '${id_produto}'`)
+      return true
     } catch(err) {
-        console.log("Error ao atualizar Cliente: "+err.code)
         return false
+        console.log("Error ao atualizar Cliente: "+err.code)
     }
 },
 
   deletarProd: async (id_produto) => {
       try {
-          await getConnection().query(`exec Loja.spExcluiProduto '${id_produto}'`)
-          return true
+        const result = await getConnection().query(`exec Loja.spExcluiProduto '${id_produto}'`)
+        return true
       } catch(err) {
           console.log("Error ao deletar produto: "+err.code)
           return false

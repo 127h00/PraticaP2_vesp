@@ -2,26 +2,26 @@ const express = require('express'); // receber o pacote  express
 const produtoDB = require('../database/produto')
 const produtoRouter = express.Router(); // criar um roteador
 
-produtoRouter.get('/', async (req, res) => {
+produtoRouter.get('/find', async (req, res) => {
   res.status(200).json(await produtoDB.selecionarTodosProd())
 })
 
-produtoRouter.get('/:id_produto', async (req, res) => {
-  const { id_produto } = req.params
-  const produto = await produtoDB.selecionarPorIdProd(id_produto)
+produtoRouter.get('/find/:id_product', async (req, res) => {
+  const { id_product } = req.params
+  const produto = await produtoDB.selecionarPorIdProd(id_product)
   if (!produto)
     res.status(404).json({ erro: 'Produto não encontrado' })
   res.status(200).json(produto)
 })
 
-produtoRouter.get('/baixoEstoque', async (req, res) => {
+produtoRouter.get('/stock/low', async (req, res) => {
   res.status(200).json(await produtoDB.baixoEstoque())
 })
 
-produtoRouter.post('/postProd', async (req, res) => {
+produtoRouter.post('/create', async (req, res) => {
   const { id_produto, nome_produto, estoque, preco, descricao } = req.body
 
-  if (!id_produto ||!nome_produto || !estoque || !preco || !descricao)
+  if (!id_produto && !nome_produto && !estoque && !preco && !descricao)
     return res.status(400).json({ erro: 'Dados obrigatórios não informados' })
 
   if(id_produto.length > 6)
@@ -35,15 +35,16 @@ produtoRouter.post('/postProd', async (req, res) => {
   if(descricao.length > 400)
     return res.status(400).json({ erro: 'A descrição do produto não pode ter mais de 400 caracteres' })
 
-  console.log(req.body)
+  if(!await produtoDB.postaProd(id_produto, nome_produto, estoque, preco, descricao))
+    return res.status(501).json({ error: "erro ao criar produto" })
   res.sendStatus(201)
 })
 
-produtoRouter.put("/:id_produto", async (req, res) => {
-  const { id_produto } = req.params
+produtoRouter.put("/alter/:id_product", async (req, res) => {
+  const { id_product } = req.params
   const { nome_produto, estoque, preco, descricao } = req.body
 
-  if(id_produto.length > 6)
+  if(id_product.length > 6)
     return res.status(400).json({ erro: 'O id do produto deve ter 6 números' })
   if(nome_produto.length > 60)
     return res.status(400).json({ erro: 'O nome do produto não pode ter mais de 60 caracteres' })
@@ -54,27 +55,25 @@ produtoRouter.put("/:id_produto", async (req, res) => {
   if(descricao.length > 400)
     return res.status(400).json({ erro: 'A descrição do produto não pode ter mais de 400 caracteres' })
 
-  const produto = await produtoDB.selecionarPorIdProd(id_produto)
+  const produto = await produtoDB.selecionarPorIdProd(id_product)
 
   if(!produto)
       return res.status(404).json({ error: "produto não encontrado" })
 
-  if(!await produtoDB.atualizarProd(id_produto, {
-      nome_produto, estoque, preco, descricao
-  }))
+  if(!await produtoDB.atualizarProd(id_product, nome_produto, estoque, preco, descricao))
       return res.status(401).json({ error: "erro ao atualizar produto" })
   return res.status(200).json({ message: "produto atualizado com sucesso" })
 })
 
-produtoRouter.delete("/:id_produto", async (req, res) => {
-  const { id_produto } = req.params
-  if(id_produto.length > 6)
+produtoRouter.delete("/delete/:id_product", async (req, res) => {
+  const { id_product } = req.params
+  if(id_product.length > 6)
     return res.status(400).json({ erro: 'O id do produto deve ter 6 números' })
 
-  if(!await produtoDB.selecionarPorIdProd(id_produto))
+  if(!await produtoDB.selecionarPorIdProd(id_product))
       return res.status(404).json({ error: "produto não encontrado" })
 
-  if(!await produtoDB.deletarProd(id_produto))
+  if(!await produtoDB.deletarProd(id_product))
       return res.status(401).json({ error: "erro ao deletar produto" })
   return res.status(200).json({ message: "produto deletado com sucesso" })
 })
