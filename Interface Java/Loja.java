@@ -10,7 +10,7 @@ import javax.swing.text.JTextComponent;
 public class Loja {
 
     private static final String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    private static final String DB_URL = "jdbc:sqlserver://REGULUS:1433;databaseName=BD23306;trustServerCertificate=true";
+    private static final String DB_URL = "jdbc:sqlserver://regulus.cotuca.unicamp.br:1433;databaseName=BD23306;trustServerCertificate=true";
     private static final String USER = "BD23306";
     private static final String PASS = "BD23306";
 
@@ -21,11 +21,12 @@ public class Loja {
     private JButton btnLogin;
     private JTable table;
     private DefaultTableModel tableModel;
-    private JTextComponent cpf_cField;
-    private JTextComponent produtoField;
-    private JTextComponent quantidadeField;
-    private JTextComponent tamanhoField;
-    private JTextComponent situacaoField;
+    private JTextField id_pedidoField = new JTextField();
+    private JTextField cpf_cField = new JTextField();
+    private JTextField produtoField = new JTextField();
+    private JTextField quantidadeField = new JTextField();
+    private JTextField tamanhoField = new JTextField();
+    private JTextField situacaoField = new JTextField();
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
@@ -110,15 +111,7 @@ public class Loja {
             }
         });
 
-        JButton btnCancelarPedido = new JButton("Cancelar pedido");
-        btnCancelarPedido.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                cancelarPedido();
-            }
-        });
-
         buttonPanel.add(btnAlterarPedido);
-        buttonPanel.add(btnCancelarPedido);
         pedidoPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         return pedidoPanel;
@@ -169,6 +162,7 @@ public class Loja {
 
         // Carregar consultas do banco de dados
         List<Pedido> pedidos = obterPedidoDoBanco();
+        System.err.println(pedidos);
 
         // Limpar tabela
         tableModel.setRowCount(0);
@@ -182,21 +176,21 @@ public class Loja {
     private List<Pedido> obterPedidoDoBanco() {
         List<Pedido> pedidos = new ArrayList<>();
 
-        String sql = "SELECT id_pedido, cpf_c, produto, quantidade, tamanha, situacao, FROM loja.pedido";
+        String sql = "SELECT id_pedido, cpf_c, produto, quantidade, tamanho, situacao FROM loja.pedido";
 
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                int id_pedido = resultSet.getInt("ID pedido");
-                String cpf_c = resultSet.getString("CPF cliente");
-                String produto = resultSet.getString("Produto");
-                int quantidade = resultSet.getInt("Quantidade");
-                String tamanho = resultSet.getString("Tamanho");
-                String situacao = resultSet.getString("Situação");
+                int id_pedido = resultSet.getInt("id_pedido");
+                String cpf_c = resultSet.getString("cpf_c");
+                String produto = resultSet.getString("produto");
+                int quantidade = resultSet.getInt("quantidade");
+                String tamanho = resultSet.getString("tamanho");
+                String situacao = resultSet.getString("situacao");
 
                 Pedido pedido = new Pedido(id_pedido, cpf_c, produto, quantidade, tamanho, situacao);
-                pedido.add(pedido);
+                pedidos.add(pedido);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -212,41 +206,11 @@ public class Loja {
         alterarFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         alterarFrame.getContentPane().setLayout(new BorderLayout());
 
-        JTextField id_pedidoField = new JTextField();
-        JTextField cpf_cField = new JTextField();
-        JTextField produtoField = new JTextField();
-        JTextField quantidadeField = new JTextField();
-        JTextField tamanhoField = new JTextField();
-        JTextField situacaoField = new JTextField();
-
         JButton btnBuscarPedido = new JButton("Buscar pedido");
-        btnBuscarPedido.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                buscarPedido(id_pedidoField.getText());
-            }
-        });
 
         JButton btnAlterarPedido = new JButton("Alterar pedido");
-        btnAlterarPedido.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                alterarPedido(
-                        id_pedidoField.getText(),
-                        cpf_cField.getText(),
-                        produtoField.getText(),
-                        quantidadeField.getText(),
-                        tamanhoField.getText(),
-                        situacaoField.getText()
-                );
-                alterarFrame.dispose();
-            }
-        });
 
         JButton btnVoltar = new JButton("Voltar");
-        btnVoltar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                alterarFrame.dispose();
-            }
-        });
 
         JPanel formPanel = new JPanel(new GridLayout(8, 2, 5, 5));
         formPanel.add(new JLabel("ID pedido:"));
@@ -270,6 +234,32 @@ public class Loja {
         alterarFrame.add(formPanel, BorderLayout.CENTER);
         alterarFrame.add(buttonPanel, BorderLayout.SOUTH);
 
+        btnBuscarPedido.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                buscarPedido(id_pedidoField.getText());
+            }
+        });
+
+        btnAlterarPedido.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                alterarPedido(
+                        id_pedidoField.getText(),
+                        cpf_cField.getText(),
+                        produtoField.getText(),
+                        quantidadeField.getText(),
+                        tamanhoField.getText(),
+                        situacaoField.getText()
+                );
+                alterarFrame.dispose();
+            }
+        });
+
+        btnVoltar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                alterarFrame.dispose();
+            }
+        });
+
         alterarFrame.setVisible(true);
     }
 
@@ -282,12 +272,11 @@ public class Loja {
                 ResultSet resultSet = pstmt.executeQuery();
 
                 if (resultSet.next()) {
-                    String cpf_c = resultSet.getString("CPF cliente");
-                    String produto = resultSet.getString("Produto");
-                    int quantidade = resultSet.getInt("Quantidade");
-                    String tamanho = resultSet.getString("Tamanho");
-                    String situacao = resultSet.getString("Situação");
-
+                    String cpf_c = resultSet.getString("cpf_c");
+                    String produto = resultSet.getString("produto");
+                    int quantidade = resultSet.getInt("quantidade");
+                    String tamanho = resultSet.getString("tamanho");
+                    String situacao = resultSet.getString("situacao");
                     // Preencher os campos da interface com os dados da consulta
                     // Aqui, você deve ter campos correspondentes na interface gráfica (JTextField, etc.)
                     cpf_cField.setText(cpf_c);
@@ -314,6 +303,7 @@ public class Loja {
                 pstmt.setInt(3, Integer.parseInt(quantidade));
                 pstmt.setString(4, tamanho);
                 pstmt.setString(5, situacao);
+                pstmt.setInt(6, Integer.parseInt(id_pedido));
 
                 pstmt.executeUpdate();
 
@@ -321,6 +311,12 @@ public class Loja {
                 mostrarPedido();
 
                 JOptionPane.showMessageDialog(frame, "Pedido alterado com sucesso.");
+                id_pedidoField.setText("");
+                cpf_cField.setText("");
+                produtoField.setText("");
+                quantidadeField.setText("");
+                tamanhoField.setText("");
+                situacaoField.setText("");
             } catch (Exception e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(frame, "Erro ao alterar o pedido. Verifique o console para mais detalhes.");
@@ -366,9 +362,6 @@ public class Loja {
             this.quantidade = quantidade;
             this.tamanho = tamanho;
             this.situacao = situacao;
-        }
-
-        public void add(Loja.Pedido pedido) {
         }
 
         public Object[] toArray() {

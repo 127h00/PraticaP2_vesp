@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "projeto",
+            "request": "launch",
+            "mainClass": "projeto",
+            "projectName": "Interface Java_a60f7b44"
+        },
+        {
+            "type": "java",
+            "name": "Loja",
+            "request": "launch",
+            "mainClass": "Loja",
+            "projectName": "Interface Java_a60f7b44"
+        },
+        {
+            "type": "java",
             "name": "Loja",
             "request": "launch",
             "mainClass": "Loja",
