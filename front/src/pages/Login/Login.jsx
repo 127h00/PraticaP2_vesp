@@ -18,6 +18,7 @@ function Login() {
     };
 
     return (
+       
         <div className={styles.section}>
             
             <div className={styles.BemVindo}>
@@ -49,6 +50,7 @@ function Login() {
             </div>
             
         </div>
+        
     );
 }
 

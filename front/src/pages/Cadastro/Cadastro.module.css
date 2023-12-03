@@ -1,0 +1,56 @@
+
+.section{
+    display: flex;
+    background-color: rgb(136, 197, 119);
+    justify-content: center;
+    width: fit-content;
+    border-radius: 8px;
+    justify-content: center;
+}
+
+/* //CADASTRO - DADOS */
+.Cadastro{
+    background-color: rgb(55, 121, 71);
+    padding: 40px;
+    margin: 15px;
+    border-radius: 8px;
+}
+
+
+.Cadastro > input{
+    border-radius: 6px;
+    border: none;
+    padding: 8px;
+    
+}
+
+.Cadastro > button{
+    margin-top: 100px;
+    padding: 50px;
+    padding-left: 30px;
+    border: 10px;
+}
+
+.Cadastro > p {
+    color: rgb(0, 0, 0);
+    font-weight: bolder;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.Cadastro > h1{
+    color:rgb(255, 255, 255);
+    font-size: 30px;
+    white-space: nowrap;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+    font-style: oblique;
+}
+
+.Cadastro > h2{
+    color:rgb(0, 0, 0);
+    font-size: 15px;
+    white-space: inherit;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    font-style: initial;
+}
