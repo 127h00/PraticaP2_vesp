@@ -10,7 +10,7 @@ import javax.swing.text.JTextComponent;
 public class projeto {
 
     private static final String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    private static final String DB_URL = "jdbc:sqlserver://REGULUS:1433;databaseName=BD23306;trustServerCertificate=true";
+    private static final String DB_URL = "jdbc:sqlserver://regulus.cotuca.unicamp.br:1433;databaseName=BD23306;trustServerCertificate=true";
     private static final String USER = "BD23306";
     private static final String PASS = "BD23306";
 
@@ -21,10 +21,11 @@ public class projeto {
     private JButton btnLogin;
     private JTable table;
     private DefaultTableModel tableModel;
-    private JTextComponent descricaoField;
-    private JTextComponent precoField;
-    private JTextComponent estoqueField;
-    private JTextComponent nome_produtoField;
+    private JTextField id_produtoField = new JTextField();
+    private JTextField nome_produtoField = new JTextField();
+    private JTextField estoqueField = new JTextField();
+    private JTextField precoField = new JTextField();
+    private JTextField descricaoField = new JTextField();
     
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
@@ -114,16 +115,8 @@ public class projeto {
             }
         });
 
-        JButton btnCancelarProduto = new JButton("Cancelar produto");
-        btnCancelarProduto.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                cancelarProduto();
-            }
-        });
-
         buttonPanel.add(btnAdicionarProduto);
         buttonPanel.add(btnAlterarProduto);
-        buttonPanel.add(btnCancelarProduto);
         produtoPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         return produtoPanel;
@@ -272,12 +265,6 @@ public class projeto {
         alterarFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         alterarFrame.getContentPane().setLayout(new BorderLayout());
 
-        JTextField id_produtoField = new JTextField();
-        JTextField nome_produtoField = new JTextField();
-        JTextField estoqueField = new JTextField();
-        JTextField precoField = new JTextField();
-        JTextField descricaoField = new JTextField();
-
         JButton btnBuscarProduto = new JButton("Buscar produto");
         btnBuscarProduto.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -295,6 +282,14 @@ public class projeto {
                         precoField.getText(),
                         descricaoField.getText()
                 );
+                alterarFrame.dispose();
+            }
+        });
+
+        JButton btnDeletarProduto = new JButton("Deletar produto");
+        btnDeletarProduto.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                deletarProduto(id_produtoField.getText());
                 alterarFrame.dispose();
             }
         });
@@ -321,6 +316,7 @@ public class projeto {
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(btnBuscarProduto);
         buttonPanel.add(btnAlterarProduto);
+        buttonPanel.add(btnDeletarProduto);
         buttonPanel.add(btnVoltar);
 
         alterarFrame.add(formPanel, BorderLayout.CENTER);
@@ -378,6 +374,27 @@ public class projeto {
             } catch (Exception e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(frame, "Erro ao alterar o produto. Verifique o console para mais detalhes.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(frame, "Produto não encontrado.");
+        }
+    }
+
+    private void deletarProduto(String id_produto) {
+        if (produtoExiste(id_produto)) {
+            String sql = "DELETE FROM loja.produto WHERE id_produto = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, id_produto);
+
+                pstmt.executeUpdate();
+
+                // Atualizar a tabela com as consultas após a alteração
+                mostrarProduto();
+
+                JOptionPane.showMessageDialog(frame, "Produto deletado com sucesso.");
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(frame, "Erro ao deletar o produto. Verifique o console para mais detalhes.");
             }
         } else {
             JOptionPane.showMessageDialog(frame, "Produto não encontrado.");
