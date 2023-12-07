@@ -14,6 +14,14 @@ clienteRouter.get('/find/:cpf', async (req, res) => {
     res.status(200).json(cliente)
 })
 
+clienteRouter.post('/login', async (req, res) => {
+    const { email, senha } = req.body
+    const cliente = await clienteDB.loginCli(email, senha)
+    if (!cliente)
+      res.status(404).json({ erro: 'email ou senha incorretos' })
+    res.status(200).json(cliente)
+})
+
 clienteRouter.get('/address', async (req, res) => {
     res.status(200).json(await clienteDB.enderecoCli())
 })
@@ -30,8 +38,8 @@ clienteRouter.post('/create', async (req, res) => {
     const { cpf, prenome, sobrenome, email, senha, cep, bairro, rua, numero,
             complemento } = req.body
 
-    if (!cpf && !prenome && !sobrenome && !email && !senha && !cep && !bairro && !rua
-        && !numero)
+    if (!cpf || !prenome || !sobrenome || !email || !senha || !cep || !bairro || !rua
+        || !numero)
         return res.status(400).json({ erro: 'Dados obrigatórios não informados' })
 
     if(cpf.length != 11)
@@ -66,6 +74,10 @@ clienteRouter.put("/alter/:cpf", async (req, res) => {
     const { prenome, sobrenome, email, senha, cep, bairro, rua, numero,
             complemento } = req.body
 
+    if (!cpf || !prenome || !sobrenome || !email || !senha || !cep || !bairro || !rua
+        || !numero)
+        return res.status(400).json({ erro: 'Dados obrigatórios não informados' })        
+
     if(prenome.length > 20)
         return res.status(400).json({ erro: 'O prenome não pode ter mais de 20 caracteres' })
     if(sobrenome.length > 50)
@@ -97,7 +109,7 @@ clienteRouter.put("/alter/:cpf", async (req, res) => {
 
 clienteRouter.delete("/delete/:cpf", async (req, res) => {
     const { cpf } = req.params
-    if(cpf.length != 11)
+    if(!cpf || cpf.length != 11)
         return res.status(400).json({ erro: 'O CPF deve ter 11 números' })
 
     if(!await clienteDB.selecionarPorIdCli(cpf))

@@ -1,14 +1,36 @@
+import React, { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
+
+import ProdutoApi from "../../hooks/produtoApi"
+
 import style from "./Produtos.module.css"
 import jaquetapuffer from '../img/jaquetapuffer.jpeg'
 
 function Produtos() {
-    return(
+    const [produto, setProduto] = useState()
+    const { id } = useParams()
 
-        <div className={style.faixa2}>
-            <h2 className={style.h2}>Tempted</h2>
-            <img src={jaquetapuffer} alt=""></img>
-        </div>
-        
+    async function handleProduto() {
+        await ProdutoApi.findById(id)
+            .then((res) => res? setProduto(res) : alert("Produto não encontrado"))
+            .catch((err) => alert("não foi possível se conectar com a API"))
+    }
+
+    useEffect(() => {
+        handleProduto()
+    }, [])
+
+    return(
+        <>
+            <div className={style.faixa2}>
+                <h2 className={style.h2}>Tempted</h2>
+            </div>
+            <img src={produto?.imagem_url} /> 
+            <h1 className={style.nome_produto}>{produto?.nome_produto}</h1>    
+            <h2 className={style.descricao}>{produto?.descricao}</h2>
+            <h3 className={style.preco}>{produto?.preco}</h3>
+        </>
+
     )
 
 }

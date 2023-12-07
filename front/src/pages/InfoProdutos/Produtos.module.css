@@ -24,7 +24,11 @@
     min-width: 212px;
     max-width: 212px;
 }
-#jaqueta{
-  width: 500px;
+.nome_produto{
+  font-style: normal;
 
+}
+.imagem_url{
+  width: 200px;
+  height: 200px;
 }

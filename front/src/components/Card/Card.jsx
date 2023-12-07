@@ -1,12 +1,12 @@
 import styles from './Card.module.css'
 import {Link} from 'react-router-dom'
 
-function Card({ image, titulo, preco }) {
+function Card({ id, image, titulo, preco }) {
     return <div className={styles.roupa}>
         <img className={styles.img} src={image} />
-        <p id={styles.titulo}>{titulo}</p>
+        <h1>{titulo}</h1>
         <p id="preco">{preco}</p>
-        <Link to={"/produtos"}>Comprar</Link>
+        <Link to={"/produto/"+id}>Comprar</Link>
         
     </div>
 }

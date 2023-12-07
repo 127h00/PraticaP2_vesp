@@ -29,6 +29,7 @@ SELECT * FROM Loja.cliente
 
 create table Loja.produto (
     id_produto char(6) NOT NULL PRIMARY KEY,
+    imagem_url TEXT NULL,
     nome_produto varchar(60) NOT NULL,
     estoque INT NOT NULL,
     preco varchar(8) NOT NULL,

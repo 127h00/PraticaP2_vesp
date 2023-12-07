@@ -1,3 +1,7 @@
+import React, { useEffect, useState } from 'react';
+
+import ProductApi from '../../hooks/produtoApi';
+
 import Menu from '../../components/Menu/Menu';
 import Card from '../../components/Card/Card';
 import blusabranca from '../img/blusinha_branca.jpeg'
@@ -18,22 +22,37 @@ import styles from './Home.module.css'
 import Banner from '../../components/Banner/Banner';
 
 function Home() {
+  const [produtos, setProdutos] = useState([]);
 
+  async function  handleProdutos() {
+    await ProductApi.findAll()
+      .then((response) => response? setProdutos(response) : alert('Erro ao carregar produtos'))
+      .catch((error) => alert('Erro ao carregar produtos'));
+  }
+
+  useEffect(() => {
+    handleProdutos();
+  }, []);
+
+  console.log(produtos);
+  
   return (
     <>
       <Menu />
       <div className={styles.main}>
         <Banner image={banner}/> 
-        <Card image={jaquetapuffer} titulo={"Jaqueta Puffer"} preco={"R$200"} />
-        <Card image={blusabranca} titulo={"Baby tee USA"} preco={"R$43.50"} />
-        <Card image={jaquetavermelha} titulo={"Jaqueta vermelha"} preco={"R$110.30"} />
-        <Card image={saiapreta} titulo={"Mini saia preta"} preco={"R$ 47.80"} />
-        <Card image={jaquetabranca} titulo={"Blusa moletom branca"} preco={"R$84.90"} />
-        <Card image={calçajoggermilitar} titulo={"Calça jogger"} preco={"R$68.45"} />
-        <Card image={regatabrancamasc} titulo={"Regata branca"} preco={"R$31.90"} />
-        <Card image={calca} titulo={"Calça jeans oversized"} preco={"R$157"} />
-        <Card image={jaquetapretamasc} titulo={"Jaqueta preta"} preco={"R$132"} />
-        <Card image={calcafem} titulo={"Calça jeans wide leg"} preco={"R$146"} />
+        {
+          produtos?.map((produto) => (
+            <Card
+              key={produto.id_produto}
+              id={produto.id_produto}
+              image={produto.imagem_url}
+              titulo={produto.nome_produto}
+              preco={produto.preco}
+              descricao={produto.descricao}
+            />
+          ))
+        }
       </div>
     </>
   );

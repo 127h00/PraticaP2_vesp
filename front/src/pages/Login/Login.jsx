@@ -1,21 +1,12 @@
-import ApiService from '../../hooks/useapi';
+
+import ClientApi from '../../hooks/clientApi';
 import styles from './Login.module.css'
 
 import React, { useState } from 'react';
 
 function Login() {
-    const [user, setUser] = useState(''); //useState armazena o que está dentro dos () - recebe apenas strings
-    const [password, setPassword] = useState('');
-
-    const handleNameChange = (event) => {
-        setUser(event.target.value);
-        console.log(user);
-    };
-
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
-        console.log(password);
-    };
+    const [email, setEmail] = useState(''); //useState armazena o que está dentro dos () - recebe apenas strings
+    const [senha, setSenha] = useState('');
 
     return (
         <main>
@@ -23,26 +14,33 @@ function Login() {
                 
                 <div className={styles.Login}>
                     <h3>Faça Login</h3>
-                    <p>Usuário</p>
+                    <p>Email</p>
                     <input
                         type="text"
-                        value={user}
-                        onChange={handleNameChange}
-                        placeholder="Digite seu nome"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Digite seu email"
                     />
                     <p>Senha</p>
                     <input
                         type="text"
-                        value={password}
-                        onChange={handlePasswordChange}
+                        value={senha}
+                        onChange={(e) => setSenha(e.target.value)}
                         placeholder="Digite sua senha"
                     />
 
                     
-                    <button onClick={() => ApiService.Login(user,password)}>Entrar</button>
-                    
+                    <button 
+                        onClick={async () => {
+                            const logged = await ClientApi.singIn({ email, senha })
+                            console.log(logged)
+                            localStorage.setItem('logged', logged)
+                            logged ? window.location.href = '/' : alert('Email ou senha incorretos')
+                        }}
+                    >
+                        Entrar
+                    </button>
                 </div>
-            
             </div>
         </main>
     );

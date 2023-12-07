@@ -152,7 +152,9 @@ function Cadastro() {
                         placeholder="qual seu seu cep?"
                     />
                     <p>
-                    <button>Submeter</button>
+                    <button>
+                        Cadastrar
+                    </button>
                     </p>
                 </div>
 

@@ -40,9 +40,7 @@ INSERT INTO Loja.produto VALUES
     'Calça jeans azul claro estilo wide leg com rasgos')
 
 SELECT * FROM Loja.produto 
-delete from loja.produto where id_produto = '000010'
-INSERT INTO loja.produto (id_produto, nome_produto, estoque, preco, descricao) VALUES  ('000009', 'Calça jeans wide leg', 25, 146, 
-    'Calça jeans azul claro estilo wide leg com rasgos')
+
 
 INSERT INTO Loja.pedido VALUES
     ('44845640090', '000002', 1, 'G', 'P')
@@ -52,3 +50,7 @@ INSERT INTO Loja.pedido VALUES
     ('64181520005', '000005', 2, 'M', 'C')
     
 SELECT * FROM Loja.pedido
+
+
+update loja.produto set imagem_url = 'https://i.imgur.com/P4HTm1H.jpg'
+where id_produto = '000007'

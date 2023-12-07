@@ -1,6 +1,16 @@
 const getConnection = require('./connection')
 
 module.exports = {
+    loginCli: async (email, senha) => {
+        try {
+          const result = await getConnection().query(`SELECT * FROM loja.cliente WHERE email='${email}' AND senha='${senha}'`)
+          if(result.recordset.length != 1)
+            return false
+          return result.recordset[0]
+        } catch (error) {
+          console.log("Error ao logar o cliente:"+error)
+        }
+    },
     selecionarClientes: async () => {
         try {
           const result = await getConnection().query('SELECT * FROM Loja.cliente')
