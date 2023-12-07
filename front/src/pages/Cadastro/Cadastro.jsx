@@ -67,93 +67,97 @@ function Cadastro() {
     };
 
     return (
-        <div className={styles.section}>
+        <main>
+            <div className={styles.section}>
 
-            <div className={styles.Cadastro}>
-                <h1>Faça seu Cadastro</h1>
-                <h2>Preencha as informações a seguir <p></p>
-                     para efetuar seu cadastro.</h2>
+                <div className={styles.Cadastro}>
+                    <h1>Faça seu Cadastro</h1>
+                    <h2>Preencha as informações a seguir <p></p>
+                        para efetuar seu cadastro.</h2>
 
-                <p>Nome:</p>
-                <input
-                    type="text"
-                    value={prenome}
-                    onChange={handlePrenomeChange}
-                    placeholder="Digite seu Nome"
-                />
+                    <p>Nome:</p>
+                    <input
+                        type="text"
+                        value={prenome}
+                        onChange={handlePrenomeChange}
+                        placeholder="Digite seu Nome"
+                    />
 
-                <p>Sobrenome:</p>
-                <input
-                    type="text"
-                    value={sobrenome}
-                    onChange={handleSobrenomeChange}
-                    placeholder="Digite seu Sobrenome"
-                />
-                <p>CPF:</p>
-                <input
-                    type="text"
-                    value={cpf}
-                    onChange={handleCpfChange}
-                    placeholder="Digite seu CPF"
-                />
+                    <p>Sobrenome:</p>
+                    <input
+                        type="text"
+                        value={sobrenome}
+                        onChange={handleSobrenomeChange}
+                        placeholder="Digite seu Sobrenome"
+                    />
+                    <p>CPF:</p>
+                    <input
+                        type="text"
+                        value={cpf}
+                        onChange={handleCpfChange}
+                        placeholder="Digite seu CPF"
+                    />
 
-                <p>Email:</p>
-                <input
-                    type="text"
-                    value={email}
-                    onChange={handleEmailChange}
-                    placeholder="Digite seu Email"
-                />
-            
+                    <p>Email:</p>
+                    <input
+                        type="text"
+                        value={email}
+                        onChange={handleEmailChange}
+                        placeholder="Digite seu Email"
+                    />
+                
+
+                </div>
+
+                <div className={styles.Cadastro}>
+                
+                    <p>Senha:</p>
+                    <input
+                        type="text"
+                        value={senha}
+                        onChange={handleSenhaChange}
+                        placeholder="Crie uma Senha"
+                    />
+
+                    <p>Bairro:</p>
+                    <input
+                        type="text"
+                        value={bairro}
+                        onChange={handleBairroChange}
+                        placeholder="Qual seu bairro?"
+                    />
+
+                    <p>Rua:</p>
+                    <input
+                        type="text"
+                        value={rua}
+                        onChange={handleRuaChange}
+                        placeholder="qual é a sua rua?"
+                    />
+
+                    <p>Complemento:</p>
+                    <input
+                        type="text"
+                        value={complemento}
+                        onChange={handleComplementoChange}
+                        placeholder="Complemento endereço"
+                    />
+
+
+                    <p>CEP:</p>
+                    <input
+                        type="text"
+                        value={cep}
+                        onChange={handleCepChange}
+                        placeholder="qual seu seu cep?"
+                    />
+                    <p>
+                    <button>Submeter</button>
+                    </p>
+                </div>
 
             </div>
-
-            <div className={styles.Cadastro}>
-               
-                <p>Senha:</p>
-                <input
-                    type="text"
-                    value={senha}
-                    onChange={handleSenhaChange}
-                    placeholder="Crie uma Senha"
-                />
-
-                <p>Bairro:</p>
-                <input
-                    type="text"
-                    value={bairro}
-                    onChange={handleBairroChange}
-                    placeholder="Digite o nome do seu bairro"
-                />
-
-                <p>Rua:</p>
-                <input
-                    type="text"
-                    value={rua}
-                    onChange={handleRuaChange}
-                    placeholder="Digite o nome da sua Rua"
-                />
-
-                <p>Complemento:</p>
-                <input
-                    type="text"
-                    value={complemento}
-                    onChange={handleComplementoChange}
-                    placeholder="Complemento do endereço"
-                />
-
-
-                <p>CEP:</p>
-                <input
-                    type="text"
-                    value={cep}
-                    onChange={handleCepChange}
-                    placeholder="Digite seu cep"
-                />
-    
-            </div>
-
-        </div>
+        </main>
     );
 }
 export default Cadastro;

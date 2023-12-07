@@ -1,11 +1,19 @@
-
+main{
+    display: flex;
+    justify-content: center;
+ 
+   background-image: linear-gradient(to bottom, rgb(29, 95, 49), rgb(30, 117, 42), rgb(154, 255, 176));
+}
 .section{
     display: flex;
     background-color: rgb(136, 197, 119);
+    margin-top: 2%;
+    margin-bottom: 2%;
     justify-content: center;
     width: fit-content;
     border-radius: 8px;
     justify-content: center;
+    
 }
 
 /* //CADASTRO - DADOS */
@@ -34,14 +42,14 @@
 .Cadastro > p {
     color: rgb(0, 0, 0);
     font-weight: bolder;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif
 }
 
 .Cadastro > h1{
     color:rgb(255, 255, 255);
     font-size: 30px;
     white-space: nowrap;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: bolder;
     font-style: oblique;
 }
@@ -50,7 +58,16 @@
     color:rgb(0, 0, 0);
     font-size: 15px;
     white-space: inherit;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-style: initial;
+}
+
+.Cadastro > button{
+    margin-top: 20px;
+    padding: 5%;
+    padding-left: 5px;
+    border: black;
+    background-color: rgb(255, 255, 255);
+    
 }

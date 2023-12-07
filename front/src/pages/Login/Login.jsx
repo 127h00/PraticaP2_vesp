@@ -18,39 +18,33 @@ function Login() {
     };
 
     return (
-       
-        <div className={styles.section}>
-            
-            <div className={styles.BemVindo}>
-                <h3>Bem Vindo!</h3>
-
-                <button>Criar Conta</button>
-            </div>
-            
-            <div className={styles.Login}>
-                <h3>Faça Login</h3>
-                <p>Usuário</p>
-                <input
-                    type="text"
-                    value={user}
-                    onChange={handleNameChange}
-                    placeholder="Digite seu nome"
-                />
-                <p>Senha</p>
-                <input
-                    type="text"
-                    value={password}
-                    onChange={handlePasswordChange}
-                    placeholder="Digite sua senha"
-                />
-
+        <main>
+            <div className={styles.section}>
                 
-                <button onClick={() => ApiService.Login(user,password)}>Entrar</button>
-                
-            </div>
+                <div className={styles.Login}>
+                    <h3>Faça Login</h3>
+                    <p>Usuário</p>
+                    <input
+                        type="text"
+                        value={user}
+                        onChange={handleNameChange}
+                        placeholder="Digite seu nome"
+                    />
+                    <p>Senha</p>
+                    <input
+                        type="text"
+                        value={password}
+                        onChange={handlePasswordChange}
+                        placeholder="Digite sua senha"
+                    />
+
+                    
+                    <button onClick={() => ApiService.Login(user,password)}>Entrar</button>
+                    
+                </div>
             
-        </div>
-        
+            </div>
+        </main>
     );
 }
 
