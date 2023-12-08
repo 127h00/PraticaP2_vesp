@@ -1,1 +1,1 @@
-exec Loja.spExcluiCliente '00000000000'
+exec Loja.spExcluiCliente '64181520005'
