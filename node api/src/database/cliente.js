@@ -54,7 +54,7 @@ module.exports = {
 
     deletarCli: async (cpf) => {
         try {
-          const result = await getConnection().query(`DELETE FROM loja.cliente WHERE cpf = '${cpf}'`)
+          const result = await getConnection().query(`exec Loja.spExcluiCliente '${cpf}'`)
           return true
         } catch(err) {
             console.log("Error ao deletar Cliente: "+err.code)

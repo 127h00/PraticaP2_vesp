@@ -1,0 +1,1 @@
+exec Loja.spExcluiCliente '00000000000'
