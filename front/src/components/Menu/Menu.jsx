@@ -9,7 +9,7 @@ function Menu() {
             </div>
             <div className={style.nav}>
                 <Link to={"/login"}>login</Link>
-                <Link to={"/cadastre-se"}>Cadastra-se</Link>
+                <Link to={"/create"}>Cadastra-se</Link>
             </div>
         </header>       
     )

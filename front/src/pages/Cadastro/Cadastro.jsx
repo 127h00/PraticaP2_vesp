@@ -1,3 +1,4 @@
+import ClientApi from '../../hooks/clientApi';
 import styles from './Cadastro.module.css'
 
 import React, { useState } from 'react';
@@ -105,12 +106,7 @@ function Cadastro() {
                         onChange={handleEmailChange}
                         placeholder="Digite seu Email"
                     />
-                
 
-                </div>
-
-                <div className={styles.Cadastro}>
-                
                     <p>Senha:</p>
                     <input
                         type="text"
@@ -118,6 +114,11 @@ function Cadastro() {
                         onChange={handleSenhaChange}
                         placeholder="Crie uma Senha"
                     />
+
+
+                </div>
+
+                <div className={styles.Cadastro}>
 
                     <p>Bairro:</p>
                     <input
@@ -133,6 +134,14 @@ function Cadastro() {
                         value={rua}
                         onChange={handleRuaChange}
                         placeholder="qual é a sua rua?"
+                    />
+
+                    <p>Número:</p>
+                    <input
+                        type="text"
+                        value={numero}
+                        onChange={handleNumeroChange}
+                        placeholder="qual é o número de sua casa?"
                     />
 
                     <p>Complemento:</p>
@@ -152,9 +161,19 @@ function Cadastro() {
                         placeholder="qual seu seu cep?"
                     />
                     <p>
-                    <button>
+
+                    <button 
+                        onClick={async () => {
+                            const created = await ClientApi.singUp({ cpf, prenome, sobrenome, email, senha, cep, bairro, rua, numero,
+                                complemento })
+                            console.log(created)
+                            localStorage.setItem('created', created)
+                            created ? window.location.href = '/' : alert('Parece que há algum erro nos dados, tente novamente!')
+                        }}
+                    >
                         Cadastrar
                     </button>
+                    
                     </p>
                 </div>
 

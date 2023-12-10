@@ -4,16 +4,6 @@ import ProductApi from '../../hooks/produtoApi';
 
 import Menu from '../../components/Menu/Menu';
 import Card from '../../components/Card/Card';
-import blusabranca from '../img/blusinha_branca.jpeg'
-import jaquetavermelha from '../img/jaquetavermelha.jpeg'
-import saiapreta from '../img/saiapreta.jpeg'
-import jaquetabranca from '../img/jaquetabranca.jpeg'
-import calçajoggermilitar from '../img/calçajoggermilitar.jpeg'
-import regatabrancamasc from '../img/regatabrancamasc.jpeg'
-import calca from '../img/calca.jpeg'
-import jaquetapretamasc from '../img/jaquetapretamasc.jpeg'
-import calcafem from '../img/calcafem.png'
-import jaquetapuffer from '../img/jaquetapuffer.jpeg'
 import banner from '../img/banner.jpeg'
 
 

@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom"
 import ProdutoApi from "../../hooks/produtoApi"
 
 import style from "./Produtos.module.css"
-import jaquetapuffer from '../img/jaquetapuffer.jpeg'
 
 function Produtos() {
     const [produto, setProduto] = useState()

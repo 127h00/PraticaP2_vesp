@@ -19,7 +19,7 @@ produtoRouter.get('/stock/low', async (req, res) => {
 })
 
 produtoRouter.post('/create', async (req, res) => {
-  const { id_produto, nome_produto, estoque, preco, descricao } = req.body
+  const { id_produto, nome_produto, estoque, preco, descricao, imagem_url } = req.body
 
   if (!id_produto && !nome_produto && !estoque && !preco && !descricao)
     return res.status(400).json({ erro: 'Dados obrigatórios não informados' })
@@ -35,14 +35,14 @@ produtoRouter.post('/create', async (req, res) => {
   if(descricao.length > 400)
     return res.status(400).json({ erro: 'A descrição do produto não pode ter mais de 400 caracteres' })
 
-  if(!await produtoDB.postaProd(id_produto, nome_produto, estoque, preco, descricao))
+  if(!await produtoDB.postaProd(id_produto, nome_produto, estoque, preco, descricao, imagem_url))
     return res.status(501).json({ error: "erro ao criar produto" })
   res.sendStatus(201)
 })
 
 produtoRouter.put("/alter/:id_product", async (req, res) => {
   const { id_product } = req.params
-  const { nome_produto, estoque, preco, descricao } = req.body
+  const { nome_produto, estoque, preco, descricao, imagem_url } = req.body
 
   if(id_product.length > 6)
     return res.status(400).json({ erro: 'O id do produto deve ter 6 números' })
@@ -60,7 +60,7 @@ produtoRouter.put("/alter/:id_product", async (req, res) => {
   if(!produto)
       return res.status(404).json({ error: "produto não encontrado" })
 
-  if(!await produtoDB.atualizarProd(id_product, nome_produto, estoque, preco, descricao))
+  if(!await produtoDB.atualizarProd(id_product, nome_produto, estoque, preco, descricao, imagem_url))
       return res.status(401).json({ error: "erro ao atualizar produto" })
   return res.status(200).json({ message: "produto atualizado com sucesso" })
 })

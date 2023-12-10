@@ -19,9 +19,9 @@ module.exports = {
     }
   },
 
-  postaProd: async (id_produto, nome_produto, estoque, preco, descricao) => {
+  postaProd: async (id_produto, nome_produto, estoque, preco, descricao, imagem_url) => {
     try {
-      const result = await getConnection().query(`INSERT INTO loja.produto (id_produto, nome_produto, estoque, preco, descricao) VALUES ('${id_produto}', '${nome_produto}', ${estoque}, ${preco}, '${descricao}')`)
+      const result = await getConnection().query(`INSERT INTO loja.produto (id_produto, nome_produto, estoque, preco, descricao, imagem_url) VALUES ('${id_produto}', '${nome_produto}', ${estoque}, ${preco}, '${descricao}', '${imagem_url}')`)
       return true
     } catch (err) {
         console.log("Error na criação do produto: "+err.code)
@@ -29,10 +29,10 @@ module.exports = {
     }
   },
 
-  atualizarProd: async (id_produto, nome_produto, estoque, preco, descricao) => {
+  atualizarProd: async (id_produto, nome_produto, estoque, preco, descricao, imagem_url) => {
     try {
-      const result = await getConnection().query(`UPDATE loja.produto SET nome_produto = '${nome_produto}', estoque = ${estoque}, preco = ${preco},
-          descricao = '${descricao}' WHERE id_produto = '${id_produto}'`)
+      const result = await getConnection().query(`UPDATE loja.produto SET nome_produto = '${nome_produto}', estoque = ${estoque}, preco = '${preco}',
+          descricao = '${descricao}', imagem_url = '${imagem_url}' WHERE id_produto = '${id_produto}'`)
       return true
     } catch(err) {
         return false
