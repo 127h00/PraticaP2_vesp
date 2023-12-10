@@ -23,12 +23,14 @@ function Produtos() {
     return(
         <>
             <div className={style.faixa2}>
-                <h2 className={style.h2}>Tempted</h2>
+            <h2 className={style.h2}>Tempted</h2>
             </div>
-            <img src={produto?.imagem_url} /> 
+            <img className={style.img} src={produto?.imagem_url} />    
             <h1 className={style.nome_produto}>{produto?.nome_produto}</h1>    
             <h2 className={style.descricao}>{produto?.descricao}</h2>
             <h3 className={style.preco}>{produto?.preco}</h3>
+            <button className={style.btnProduto}>Comprar</button>
+            
         </>
 
     )

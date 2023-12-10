@@ -28,7 +28,37 @@
   font-style: normal;
 
 }
-.imagem_url{
-  width: 200px;
-  height: 200px;
+.img{
+  width: 320px;
+  min-width: 320px;
+  max-width: 320px;
+  height: 390px;
+  padding: 8px;
+  
+}
+.btnProduto{
+  /* border-radius: 15px;
+  border: 1px solid #000; */
+  width: 250px;
+  height: 45px;
+  flex-shrink: 0;
+  border-radius: 15px;
+  color: #ffffff;
+  font-family: Fontdiner Swanky;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  background: #216A47;
+  
+
+}
+.descricao{
+  font-size: 25px;
+}
+.nome_produto{
+  font-size: 30px;
+}
+.preco{
+  font-size: 25px;
 }
