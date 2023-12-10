@@ -72,8 +72,6 @@ function Cadastro() {
 
                 <div className={styles.Cadastro}>
                     <h1>Faça seu Cadastro</h1>
-                    <h2>Preencha as informações a seguir <p></p>
-                        para efetuar seu cadastro.</h2>
 
                     <p>Nome:</p>
                     <input
@@ -124,7 +122,7 @@ function Cadastro() {
                         type="text"
                         value={bairro}
                         onChange={handleBairroChange}
-                        placeholder="Qual seu bairro?"
+                        placeholder="Seu bairro"
                     />
 
                     <p>Rua:</p>
@@ -132,7 +130,7 @@ function Cadastro() {
                         type="text"
                         value={rua}
                         onChange={handleRuaChange}
-                        placeholder="qual é a sua rua?"
+                        placeholder="Digite o nome da sua rua"
                     />
 
                     <p>Complemento:</p>
@@ -149,13 +147,14 @@ function Cadastro() {
                         type="text"
                         value={cep}
                         onChange={handleCepChange}
-                        placeholder="qual seu seu cep?"
+                        placeholder="Digite seu cep?"
                     />
-                    <p>
+
+                    <div className={styles.BotaoSubmeter}>
                     <button>
-                        Cadastrar
+                        Submeter 
                     </button>
-                    </p>
+                    </div>
                 </div>
 
             </div>
