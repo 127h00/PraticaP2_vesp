@@ -5,7 +5,8 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from  "react-router-dom";
 import Produtos from './pages/InfoProdutos/Produtos';
 import Login from './pages/Login/Login';
-import Cadastro from './pages/Cadastro/Cadastro'
+import Cadastro from './pages/Cadastro/Cadastro';
+import Pedido from './pages/Pedido/Pedido'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -18,6 +19,7 @@ root.render(
         <Route path='/login' Component={Login} />
         <Route path='/produto/:id' Component={Produtos} />
         <Route path='/create' Component={Cadastro} />
+        <Route path='/createOrder' Component={Pedido} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

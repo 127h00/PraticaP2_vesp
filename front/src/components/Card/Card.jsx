@@ -5,7 +5,7 @@ function Card({ id, image, titulo, preco }) {
     return <div className={styles.roupa}>
         <img className={styles.img} src={image} />
         <h1>{titulo}</h1>
-        <p id="preco">{preco}</p>
+        <p id="preco">R${preco}</p>
         <Link to={"/produto/"+id} className=''>Comprar</Link>
         
     </div>

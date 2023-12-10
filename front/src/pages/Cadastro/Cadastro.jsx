@@ -73,8 +73,6 @@ function Cadastro() {
 
                 <div className={styles.Cadastro}>
                     <h1>Faça seu Cadastro</h1>
-                    <h2>Preencha as informações a seguir <p></p>
-                        para efetuar seu cadastro.</h2>
 
                     <p>Nome:</p>
                     <input

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
-
-import ProdutoApi from "../../hooks/produtoApi"
-
-import style from "./Produtos.module.css"
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import PedidoApi from "../../hooks/pedidoApi";
+import ProdutoApi from "../../hooks/produtoApi";
+import style from "./Produtos.module.css";
+import {Link} from 'react-router-dom'
 
 function Produtos() {
     const [produto, setProduto] = useState()
@@ -27,8 +27,8 @@ function Produtos() {
             <img className={style.img} src={produto?.imagem_url} />    
             <h1 className={style.nome_produto}>{produto?.nome_produto}</h1>    
             <h2 className={style.descricao}>{produto?.descricao}</h2>
-            <h3 className={style.preco}>{produto?.preco}</h3>
-            <button className={style.btnProduto}>Comprar</button>
+            <h3 className={style.preco}>R${produto?.preco}</h3>
+            <button className={style.btnProduto}><Link to={"/createOrder"}>Comprar</Link></button>
             
         </>
 

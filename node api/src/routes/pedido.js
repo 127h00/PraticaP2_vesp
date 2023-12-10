@@ -30,7 +30,7 @@ pedidoRouter.get('/pending', async (req, res) => {
   res.status(200).json(await pedidoDB.pedidoPendente())
 })
 
-pedidoRouter.post('/create', async (req, res) => {
+pedidoRouter.post('/createOrder', async (req, res) => {
     const { cpf_c, id_produto, quantidade, tamanho } = req.body
 
     if (!cpf_c && !id_produto && !quantidade && !tamanho)

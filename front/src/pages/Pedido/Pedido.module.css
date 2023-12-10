@@ -1,0 +1,41 @@
+main{
+    display: flex;
+    justify-content: center;
+    background-color: #102820;
+}
+
+.section{
+    display: flex;
+    background-color: rgb(0, 0, 0);
+    margin-top: 2%;
+    margin-bottom: 2%;
+    justify-content: center;
+    width: fit-content;
+    border-radius: 10px;
+    justify-content: center;
+    
+}
+
+.Pedido > h1{
+    color:rgb(255, 255, 255);
+    font-size: 40px;
+    justify-content: center;
+    white-space: nowrap;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    font-style: oblique;
+}
+
+.Pedido > input{
+    border-radius: 6px;
+    border: none;
+    padding: 8px;
+    background-color: #daebe7;
+    
+}
+
+.Pedido > p {
+    color: rgb(0, 0, 0);
+    font-weight: lighter;
+    font-family: Arial, Helvetica, sans-serif
+}

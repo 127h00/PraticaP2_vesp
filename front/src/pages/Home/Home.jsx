@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from 'react';
-
 import ProductApi from '../../hooks/produtoApi';
-
 import Menu from '../../components/Menu/Menu';
 import Card from '../../components/Card/Card';
 import banner from '../img/banner.jpeg'
-
-
-
 import styles from './Home.module.css'
 import Banner from '../../components/Banner/Banner';
 
