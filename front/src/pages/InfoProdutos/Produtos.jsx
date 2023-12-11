@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import PedidoApi from "../../hooks/pedidoApi";
 import ProdutoApi from "../../hooks/produtoApi";
 import style from "./Produtos.module.css";
 import {Link} from 'react-router-dom'
