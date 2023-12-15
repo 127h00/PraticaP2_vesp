@@ -1,3 +1,6 @@
+// 23303 Ana Luiza Job
+// 23306 Anna Clara Ferraz
+// 23336 Thiago Carvalho Costa
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
@@ -87,7 +90,6 @@ public class projeto {
     private JPanel createProdutoPanel() {
         JPanel produtoPanel = new JPanel(new BorderLayout());
 
-        // Tabela para mostrar as consultas
         tableModel = new DefaultTableModel();
         tableModel.addColumn("ID produto");
         tableModel.addColumn("Nome do produto");
@@ -99,7 +101,6 @@ public class projeto {
         JScrollPane scrollPane = new JScrollPane(table);
         produtoPanel.add(scrollPane, BorderLayout.CENTER);
 
-        // Botões para adicionar, alterar e cancelar produtos
         JPanel buttonPanel = new JPanel();
         JButton btnAdicionarProduto = new JButton("Adicionar produto");
         btnAdicionarProduto.addActionListener(new ActionListener() {
@@ -133,7 +134,7 @@ public class projeto {
     }
 
     private void fazerLogin() {
-        // Utilizaremos as suas credenciais diretamente
+
         String user = USER;
         String pass = PASS;
 
@@ -165,13 +166,10 @@ public class projeto {
         frame.getContentPane().getComponent(0).setVisible(false); // Oculta o painel de login
         frame.getContentPane().getComponent(1).setVisible(true); // Exibe o painel de consultas
 
-        // Carregar consultas do banco de dados
         List<Produto> produtos = obterProdutoDoBanco();
 
-        // Limpar tabela
         tableModel.setRowCount(0);
 
-        // Adicionar consultas à tabela
         for (Produto produto : produtos) {
             tableModel.addRow(produto.toArray());
         }
@@ -203,7 +201,7 @@ public class projeto {
     }
 
     private void abrirInserirProduto() {
-        // Interface para adicionar consulta
+
         JFrame inserirFrame = new JFrame("Adicionar produto");
         inserirFrame.setBounds(100, 100, 400, 300);
         inserirFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -259,7 +257,7 @@ public class projeto {
     }
 
     private void abrirAlterarProduto() {
-        // Interface para alterar consulta
+
         JFrame alterarFrame = new JFrame("Alterar produto");
         alterarFrame.setBounds(100, 100, 400, 300);
         alterarFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -339,8 +337,6 @@ public class projeto {
                     String preco = resultSet.getString("preco");
                     String descricao = resultSet.getString("descricao");
 
-                    // Preencher os campos da interface com os dados da consulta
-                    // Aqui, você deve ter campos correspondentes na interface gráfica (JTextField, etc.)
                     nome_produtoField.setText(nome_produto);
                     estoqueField.setText(String.valueOf(estoque));
                     precoField.setText(preco);
@@ -367,7 +363,6 @@ public class projeto {
 
                 pstmt.executeUpdate();
 
-                // Atualizar a tabela com as consultas após a alteração
                 mostrarProduto();
 
                 JOptionPane.showMessageDialog(frame, "Produto alterado com sucesso.");
@@ -388,7 +383,6 @@ public class projeto {
 
                 pstmt.executeUpdate();
 
-                // Atualizar a tabela com as consultas após a alteração
                 mostrarProduto();
 
                 JOptionPane.showMessageDialog(frame, "Produto deletado com sucesso.");
@@ -402,8 +396,6 @@ public class projeto {
     }
 
     private void adicionarProduto(String id_produto, String nome_produto, String estoque, String preco, String descricao) {
-        // Implemente a lógica para adicionar uma nova consulta no banco de dados
-        // Exemplo: Inserir os dados no banco usando uma instrução SQL INSERT
 
         String sql = "INSERT INTO loja.produto (id_produto, nome_produto, estoque, preco, descricao) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -415,7 +407,6 @@ public class projeto {
 
             pstmt.executeUpdate();
 
-            // Atualizar a tabela com as consultas após a adição
             mostrarProduto();
 
             JOptionPane.showMessageDialog(frame, "Produto adicionado com sucesso.");
@@ -423,11 +414,6 @@ public class projeto {
             e.printStackTrace();
             JOptionPane.showMessageDialog(frame, "Erro ao adicionar o produto. Verifique o console para mais detalhes.");
         }
-    }
-
-    private void cancelarProduto() {
-        // Implemente a lógica para cancelar uma consulta, se necessário
-        // Exemplo: Remover a consulta do banco de dados
     }
 
     private boolean produtoExiste(String id_produto) {
@@ -445,8 +431,6 @@ public class projeto {
 
         return false;
     }
-
-    // O restante do seu código...
 
     public static class Produto {
         private String id_produto;
